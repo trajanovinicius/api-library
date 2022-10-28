@@ -1,8 +1,14 @@
 const express = require("express");
-const BooksController = require("./controllers/books-controller");
-
 const routes = express.Router();
 
-routes.get("/books", BooksController.getBooks);
+const BooksController = require("../src/controllers/BooksController")
+
+routes.post("/books", BooksController.store);
+
+routes.get("/books-list", BooksController.index);
+
+routes.put("/books-update/:id", BooksController.update)
+
+routes.delete("/books-delete/:id", BooksController.delete)
 
 module.exports = routes;
