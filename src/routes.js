@@ -7,7 +7,7 @@ routes.post("/books", BooksController.store);
 
 routes.get("/books-list", BooksController.index);
 
-routes.put("/books-update/:id", BooksController.update)
+routes.patch("/books-update/:id", BooksController.update)
 
 routes.delete("/books-delete/:id", BooksController.delete)
 

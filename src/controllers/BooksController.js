@@ -23,26 +23,39 @@ module.exports = {
 
     async update(req,res) {
 
-        const { id } = req.params.id;
+        const id  = req.params.id;
         const {name, author, value} = req.body
-         
-        const bookUpdate = await Book.updateOne({ _id: id, name, author, value});
 
-        res.status(200).json({
-            message: "Livro atualizado com sucesso!",
-            bookUpdate,
-        })
+        const bookBody  = {
+            name, 
+            author,
+            value
+        }
+         try {
+
+            const bookUpdate = await Book.updateOne({ _id: id}, bookBody);
+
+            if (!bookUpdate){
+                res.status(422).json({message: "O Livro não foi encontrado! "})
+                return
+            }
+
+            res.status(200).json(bookBody)
+         } catch (error) {
+           res.status(500).json({error: error})
+         }
     },
 
     async delete(req,res) {
 
-        const { id } = req.params.id;
-         
-        const bookDelete = await Book.deleteOne({id});
+        const id = req.params.id;
 
-        res.status(200).json({
-            message: "Livro deletado com sucesso!",
-            bookDelete,
-        })
-    }
+        try {
+            const bookDelete = await Book.deleteOne({_id: id});
+
+            res.status(200).json({message: "Livro Deletado com sucesso", bookDelete})
+        } catch (error) {
+            res.status(500).json({message: "Falha ao deletar este livro"})
+        }
+    },
 };
