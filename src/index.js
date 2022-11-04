@@ -13,5 +13,5 @@ app.use(express.json());
 app.use("/api/v1", require("../src/routes"));
 
 app.listen(3333, () => {
-  console.log(`Hello! Server started on port 3333`);
+  console.log(`Hello! Server started on port ${process.env.PORT}`);
 });
