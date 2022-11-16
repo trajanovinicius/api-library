@@ -3,9 +3,9 @@ const routes = express.Router();
 
 const BooksController = require("../src/controllers/BooksController")
 
-routes.post("/books", BooksController.store);
+routes.post("/books", BooksController.create);
 
-routes.get("/books-list", BooksController.index);
+routes.get("/books-list", BooksController.list);
 
 routes.patch("/books-update/:id", BooksController.update)
 
